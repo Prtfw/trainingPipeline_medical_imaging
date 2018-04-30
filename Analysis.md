@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: ./images
+---
+
 ### Analysis:
 
 This notebook contains data visualization and exploration code.
@@ -8,11 +12,11 @@ Pipeline functions (mostly in .py files) were implemented for imag process and a
 
 - plotted the distribution (position agnostic) of the pixels inside the i-contour vs. pixels between the i-contour and o-countours (muscle)
 
-  ![image-20180429170159543](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429170159543.png)
+  ![image-20180429170159543](https://ws2.sinaimg.cn/large/006tKfTcly1fqudojj7cfj309c06aq30.jpg)
 
 - usually there are 2 peaks in plot for the above distributions, since blood pool is darker
 
-    ​	![image-20180429170427014](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429170427014.png)
+    ​	![image-20180429170427014](https://ws4.sinaimg.cn/large/006tKfTcly1fqudonypevj306y06vdfw.jpg)
 
 - check the distribution of the pixel density via 2 sample ks test using a random subset. 
     - this is a non-parametric test of "distance" between the 2 sampling distribution
@@ -25,29 +29,29 @@ Pipeline functions (mostly in .py files) were implemented for imag process and a
 
     - but looking at the distribution histograms we commonly see overlaps which means we don't expect the threshold segmentation to be extremely accurate
 
-      ![image-20180429171529420](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429171529420.png)
+      ![image-20180429171529420](/Users/mengningshang/Desktop/Dev_Env/medseg/images/image-20180429171529420.png)
 
-      ![image-20180429171555557](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429171555557.png)
+      ![image-20180429171555557](https://ws3.sinaimg.cn/large/006tKfTcly1fqudoojk9zj30eh07gdg3.jpg)
 
 - proceeded to compute a threshold value using one common method "threshold_otsu"
     - use try_all_threshold on a random subset and visually picked the best performing (method) from the try_all_threshold set ('otsu')
 
         #### one_sample:
 
-        ![image-20180429170916256](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429170916256.png)
+        ![image-20180429170916256](https://ws1.sinaimg.cn/large/006tKfTcly1fqudolczd4j30er0hw75h.jpg)
 
     - computed a blood pool segmentation mask based on the otsu threshold value (only on the region inside the outter contour mask, this region is isolated by calling 'select_region' with the dicom and the o-contour mask, if we do not do this we get a threshold on the whole dicom image (including other organs and structures) instead, which is not what we want)
 
         #### mask over o-contour (dark ring = Muscle, light interior region = left ventricle blood pool):
 
-        ![image-20180429171315295](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429171315295.png)
+        ![image-20180429171315295](https://ws2.sinaimg.cn/large/006tKfTcly1fqudopul23j30c506daa3.jpg)
 
     - after applying the threshold I compared the IOU (Intersection over Union) score for my own ('otsu') threshold based segmentation vs the gold labeled version
         - custom implemented a IOU_score function that accounts for different sizes in the region, each pixel is identified by it's row, col index
 
     - also plotted the result of each contour pair with IOU score and ks test pvalues from ('otsu') threshold based segmentation results
 
-        ![image-20180429171354683](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429171354683.png)
+        ![image-20180429171354683](https://ws1.sinaimg.cn/large/006tKfTcly1fqudommu2aj30vq0n0tas.jpg)
 
     - after inspecting the IOU scores, and ks-pvalues for all examples, I conclude threshold only heurisits are unlikely to perform well
         - slightly more than 1/2 (65%) of the dicoms with both i and o contours gave a IOU score of > .75 which is quite low for a medical setting
