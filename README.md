@@ -10,7 +10,7 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
 
   ![image-20180429170159543](https://ws2.sinaimg.cn/large/006tKfTcly1fqudojj7cfj309c06aq30.jpg)
 
-- usually there are 2 peaks in plot for the above distributions, since blood pool is darker
+- usually there are 2 peaks in plot for the above distributions, since blood pool is lighter in color
 
     ​	![image-20180429170427014](https://ws4.sinaimg.cn/large/006tKfTcly1fqudonypevj306y06vdfw.jpg)
 
