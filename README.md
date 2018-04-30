@@ -27,7 +27,7 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
 
       #### Example of overlap + corresponding dicom:
 
-      ![image-20180429173621184](/var/folders/k7/sm42pzvx5tg8rg49b0_s2bz80000gn/T/abnerworks.Typora/image-20180429173621184.png)
+      ![image-20180429173621184](https://ws4.sinaimg.cn/large/006tKfTcly1fqudzv0ruqj309n06a74c.jpg)
 
       ![image-20180429171555557](https://ws3.sinaimg.cn/large/006tKfTcly1fqudoojk9zj30eh07gdg3.jpg)
 
