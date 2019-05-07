@@ -63,5 +63,9 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
     - canny edge detection inside the o-contour region
     - flood-filling
     - normalizing the images could improve segmentation results (similar to the first idea)
-    - try more "dynamic" ways of finding thresholds, (kmean is a clear classical ML technique and U-Nets is a clear DL option)
-      ​
+    
+- Next:
+    - try more "dynamic" ways of finding thresholds, (kmean is a clear classical ML technique) 
+    - U-Nets architecture is a deep learning option that will likely significantly improve results (but potentially expensive/ overkill)
+
+
