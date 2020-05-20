@@ -6,15 +6,21 @@ The goal is to explore threshold and other heuristic based methods for cardio lv
 
 Pipeline functions (mostly in .py files) were implemented for image process and also for feeding into (machine learning / deep learning) model as batches.
 
-   ![dicome example](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface.png"/>
+</p>
 
 - plotted the (density) distribution (position agnostic) of the pixels inside the i-contour vs. pixels between the i-contour and o-contours (muscle)
 
-    ![pixels density](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-1.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-1.png"/>
+</p>
 
 - usually there are 2 peaks in plot for the above distributions, since blood pool is lighter in color
 
-    ![distributions](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/2_peaks.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/2_peaks.png"/>
+</p>
 
 
 - check the distribution of the pixel density via 2 sample ks test using a random subset. 
