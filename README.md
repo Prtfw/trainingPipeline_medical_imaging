@@ -51,12 +51,6 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
     
         ![full example](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/end.png)
 
-
-        #### mask over o-contour (dark ring = Muscle, light interior region = left ventricle blood pool):
-        ![mask](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-2.png)
-
-        ![mask-2](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/mask-contours.png)
-
     - after applying the threshold I compared the IOU (Intersection over Union) score for my own ('otsu') threshold based segmentation vs the gold labeled version
         - custom implemented a IOU_score function that accounts for different sizes in the region, each pixel is identified by it's row, col index
         
