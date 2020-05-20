@@ -48,6 +48,9 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
         ![all_threshold](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/otsu.png)
 
     - computed a blood pool segmentation mask based on the otsu threshold value (only on the region inside the outer contour mask, this region is isolated by calling 'select_region' with the dicom and the o-contour mask, if we do not do this we get a threshold on the whole dicom image (including other organs and structures) instead, which is not what we want)
+    
+        ![full example](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/end.png)
+
 
         #### mask over o-contour (dark ring = Muscle, light interior region = left ventricle blood pool):
         ![mask](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-2.png)
@@ -56,6 +59,11 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
 
     - after applying the threshold I compared the IOU (Intersection over Union) score for my own ('otsu') threshold based segmentation vs the gold labeled version
         - custom implemented a IOU_score function that accounts for different sizes in the region, each pixel is identified by it's row, col index
+        
+         #### mask over o-contour (dark ring = Muscle, light interior region = left ventricle blood pool):
+        ![mask](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-2.png)
+
+        ![mask-2](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/mask-contours.png)
 
     - also plotted the result of each contour pair with IOU score and ks test pvalues from ('otsu') threshold based segmentation results
 
