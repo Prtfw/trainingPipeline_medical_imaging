@@ -6,13 +6,16 @@ The goal is to explore threshold and other heuristic based methods for cardio lv
 
 Pipeline functions (mostly in .py files) were implemented for image process and also for feeding into (machine learning / deep learning) model as batches.
 
+   ![dicome example](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface.png)
+
 - plotted the (density) distribution (position agnostic) of the pixels inside the i-contour vs. pixels between the i-contour and o-contours (muscle)
 
-  ![image-20180429170159543](https://ws2.sinaimg.cn/large/006tKfTcly1fqudojj7cfj309c06aq30.jpg)
+    ![pixels density](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-1.png)
 
 - usually there are 2 peaks in plot for the above distributions, since blood pool is lighter in color
 
-    ​	![image-20180429170427014](https://ws4.sinaimg.cn/large/006tKfTcly1fqudonypevj306y06vdfw.jpg)
+    ![distributions](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/2_peaks.png)
+
 
 - check the distribution of the pixel density via 2 sample ks test using a random subset. 
     - this is a non-parametric test of "distance" between the 2 sampling distribution
@@ -27,29 +30,30 @@ Pipeline functions (mostly in .py files) were implemented for image process and 
 
       #### Example of overlap + corresponding dicom:
 
-      ![image-20180429173621184](https://ws4.sinaimg.cn/large/006tKfTcly1fqudzv0ruqj309n06a74c.jpg)
+      ![distribution overlap](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/overlap.png)
 
-      ![image-20180429171555557](https://ws3.sinaimg.cn/large/006tKfTcly1fqudoojk9zj30eh07gdg3.jpg)
+      ![corresponding dicom](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/overlap-dicom.png)
 
 - proceeded to compute a threshold value using one common method "threshold_otsu"
     - use try_all_threshold on a random subset and visually picked the best performing (method) from the try_all_threshold set ('otsu')
 
         #### one_example:
 
-        ![image-20180429170916256](https://ws1.sinaimg.cn/large/006tKfTcly1fqudolczd4j30er0hw75h.jpg)
+        ![all_threshold](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/otsu.png)
 
     - computed a blood pool segmentation mask based on the otsu threshold value (only on the region inside the outer contour mask, this region is isolated by calling 'select_region' with the dicom and the o-contour mask, if we do not do this we get a threshold on the whole dicom image (including other organs and structures) instead, which is not what we want)
 
         #### mask over o-contour (dark ring = Muscle, light interior region = left ventricle blood pool):
+        ![mask](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/preface-2.png)
 
-        ![image-20180429171315295](https://ws2.sinaimg.cn/large/006tKfTcly1fqudopul23j30c506daa3.jpg)
+        ![mask-2](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/mask-contours.png)
 
     - after applying the threshold I compared the IOU (Intersection over Union) score for my own ('otsu') threshold based segmentation vs the gold labeled version
         - custom implemented a IOU_score function that accounts for different sizes in the region, each pixel is identified by it's row, col index
 
     - also plotted the result of each contour pair with IOU score and ks test pvalues from ('otsu') threshold based segmentation results
 
-        ![image-20180429171354683](https://ws1.sinaimg.cn/large/006tKfTcly1fqudommu2aj30vq0n0tas.jpg)
+        ![scores](https://raw.githubusercontent.com/Prtfw/trainingPipeline/update_readme/assets/iou_print_stats.png)
 
     - after inspecting the IOU scores, and ks-pvalues for all examples, I conclude threshold only heuristics are unlikely to perform well
         - slightly more than 1/2 (65%) of the dicoms with both i and o contours gave a IOU score of > .75 which is quite low for a medical setting
